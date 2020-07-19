@@ -1,0 +1,19 @@
+{
+  "name": "count-the-things-multiplayer",
+  "version": "1.0.0",
+  "description": "count the things - multiplayer edition!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MustardForBreakfast/count-the-things-multiplayer.git"
+  },
+  "author": "Justin Wayne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MustardForBreakfast/count-the-things-multiplayer/issues"
+  },
+  "homepage": "https://github.com/MustardForBreakfast/count-the-things-multiplayer#readme"
+}
