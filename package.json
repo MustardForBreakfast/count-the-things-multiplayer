@@ -4,7 +4,8 @@
   "description": "count the things - multiplayer edition!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app/index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/MustardForBreakfast/count-the-things-multiplayer/issues"
   },
-  "homepage": "https://github.com/MustardForBreakfast/count-the-things-multiplayer#readme"
+  "homepage": "https://github.com/MustardForBreakfast/count-the-things-multiplayer#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "path": "^0.12.7"
+  }
 }
