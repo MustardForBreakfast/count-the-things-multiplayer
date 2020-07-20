@@ -1,5 +1,29 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        Hi, i am site.
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge; chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Count the things.</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    <meta name="description" content="Click some buttons, count some things.">
+    <meta name="author" content="MustardForBreakfast">
+    <link rel='stylesheet' type='text/css' href='index.css'>
+</head>
+
+<body>
+    <div class="main">
+        <h1 id='headerText'>Count the things.</h1>
+        <div class='countContainer'>
+            <span id='countDisplay'></span>
+        </div>
+        <div class='controlButtons'>
+            <button class='incbutton' id='minusButton'>-</button>
+            <button class='incbutton' id='plusButton'>+</button>
+        </div>
+    </div>
+</body>
+<script src='index.js'></script>
+
 </html>
