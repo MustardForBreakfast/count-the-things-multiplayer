@@ -56,7 +56,7 @@ function handleMessage(message, connection) {
         sendCountToAll();
     }
     catch(err) {
-        console.log('invlaid message content: ', err)
+        console.log('invalid message content: ', err)
     }
 }
 

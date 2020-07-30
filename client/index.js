@@ -7,11 +7,11 @@ function initWsClient() {
     };
 
     client.onopen = function () {
-        console.log('WebSocket Client Connected');
+        console.log('Client Connected');
     };
 
     client.onclose = function () {
-        console.log('counter-protocol Client Closed');
+        console.log('Client Closed');
     };
 
     client.onmessage = function (e) {
@@ -22,7 +22,7 @@ function initWsClient() {
                 render(newCount);
             }
             catch(err){
-                console.log('message reception error: ', err)
+                console.error('message reception error: ', err)
             }
         }
     };
