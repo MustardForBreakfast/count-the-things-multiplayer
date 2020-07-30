@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
-const WebSocketServer = require('websocket').server;
+const ws = require('websocket');
+const { getCount, add, subtract } = require('./store');
+
+const WebSocketServer = ws.server;
 
 // Serve static assets (e.g. html) via normal ol' http
 const app = express();
@@ -17,19 +20,16 @@ const wsServer = new WebSocketServer({
     httpServer: server
 });
 
-// Global count state, because this is a potato app.
-let count = 0;
-
 function sendCount(connection) {
     const resp = {
-        count: count
+        count: getCount(),
     }
     connection.sendUTF(JSON.stringify(resp));
 }
 
 function sendCountToAll() {
     const resp = {
-        count: count
+        count: getCount(),
     }
     wsServer.connections.forEach(
         conn => {
@@ -47,9 +47,9 @@ function handleMessage(message, connection) {
         }
 
         if(content.op === 'add'){
-            count += content.value;
+            add(content.value);
         } else if(content.op === 'subtract'){
-            count -= content.value;
+            subtract(content.value);
         } else {
             throw `unrecognized op: ${content.op}`;
         }
