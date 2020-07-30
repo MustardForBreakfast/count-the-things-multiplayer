@@ -40,62 +40,9 @@ function handleMessage(message, server) {
     }
 }
 
-function configureWsConnection(server, connection){
-    connection.on('message', function (message) {
-        try {
-            if (message.type === 'utf8') {
-                console.log('Received Message: ' + message.utf8Data);
-                handleMessage(message, server);
-            } else {
-                throw `Unsupported message type: ${message.type}`
-            }
-        } catch (err) {
-            console.log('message failure: ', err)
-        }
-    });
-
-    connection.on('close', function (reasonCode, description) {
-        console.log((new Date()) + ' Peer ' + connection.remoteAddress + ' disconnected.');
-    });
-
-    // Send the initial count to the new connection
-    sendCount(connection);
-}
-
-function originIsAllowed(origin) {
-    // TODO: put logic here to detect whether the specified origin is allowed.
-    return true;
-}
-
-function authenticate() {
-    // TODO: put auth logic here.
-    return true;
-}
-
-function initWsConnection(server){
-    server.on('request', function (request) {
-        if (!originIsAllowed(request.origin) || !authenticate()) {
-            // Make sure we only accept requests from an allowed origin
-            request.reject();
-            console.log((new Date()) + ' Connection from origin ' + request.origin + ' rejected.');
-            return;
-        }
-
-        try {
-            const connection = request.accept('counter-protocol', request.origin);
-            console.log((new Date()) + ' Connection accepted.');
-            configureWsConnection(server, connection);
-        }
-        catch (err) {
-            console.log(`connection failure: ${err}`)
-        }
-    });
-}
 
 module.exports = {
     sendCount: sendCount,
     sendCountToAll: sendCountToAll,
     handleMessage: handleMessage,
-    configureWsConnection: configureWsConnection,
-    initWsConnection: initWsConnection,
 }

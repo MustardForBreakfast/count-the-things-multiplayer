@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const WebSocketServer = require('websocket').server;
-const { initWsConnection } = require('./interface');
+const { configureWsServer } = require('./init');
 
 // Serve static assets (e.g. html) via normal ol' http
 const app = express();
@@ -14,7 +14,7 @@ const server = app.listen(port, () => {
 });
 
 // Do the socket dance
-initWsConnection(
+configureWsServer(
     new WebSocketServer({
         httpServer: server
     })
