@@ -11,8 +11,8 @@ const hostname = process.env.HOSTNAME || `localhost:${port}`
 const app = express();
 app.use(expressCspHeader({
     directives: {
-        'default-src': [SELF],
-        'script-src': [SELF, `ws://${hostname}`, `wss://${hostname}`],
+        'default-src': [SELF, `ws://${hostname}`,`wss://${hostname}`],
+        'script-src': [SELF],
         'style-src': [SELF],
         'img-src': [SELF],
         'worker-src': [NONE],
