@@ -4,12 +4,15 @@ const WebSocketServer = require('websocket').server;
 const { configureWsServer } = require('./init');
 const { expressCspHeader, SELF, NONE } = require('express-csp-header');
 
+const port = process.env.PORT || 8765
+const hostname = process.env.HOSTNAME || `localhost:${port}`
+
 // Serve static assets (e.g. html) via normal ol' http
 const app = express();
 app.use(expressCspHeader({
     directives: {
         'default-src': [SELF],
-        'script-src': [SELF],
+        'script-src': [SELF, `ws://${hostname}`, `wss://${hostname}`],
         'style-src': [SELF],
         'img-src': [SELF],
         'worker-src': [NONE],
@@ -20,7 +23,6 @@ app.use(express.static(__dirname + '/../client'));
 
 
 // Start an http server
-const port = process.env.PORT || 8765
 const server = app.listen(port, () => {
     console.log(`listening http://localhost:${port}`);
 });
