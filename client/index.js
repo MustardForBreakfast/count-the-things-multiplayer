@@ -1,5 +1,5 @@
 function initWsClient() {
-    const host = `ws://${location.host}`
+    const host = `wss://${location.host}`
     const client = new WebSocket(host, 'counter-protocol');
 
     client.onerror = function (err) {
