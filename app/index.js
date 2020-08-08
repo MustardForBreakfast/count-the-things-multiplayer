@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/../client'));
 
 // Start an http server
 const server = app.listen(port, () => {
-    console.log(`listening http://localhost:${port}`);
+    console.log(`listening at ${hostname}, port ${port}`);
 });
 
 // Do the socket dance
