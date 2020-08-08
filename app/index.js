@@ -8,7 +8,7 @@ const app = express();
 app.use(express.static(__dirname + '/../client'));
 
 // Start an http server
-const port = 8765;
+const port = process.env.PORT || 8765
 const server = app.listen(port, () => {
     console.log(`listening http://localhost:${port}`);
 });
