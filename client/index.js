@@ -1,19 +1,24 @@
+/**
+ * Initialize a Websocket client.
+ */
 function initWsClient() {
-    const host = `wss://${location.host}`
-    const client = new WebSocket(host, 'counter-protocol');
+    // Use SSL for all but local development environments
+    const protocol = location.hostname === "localhost" ? "ws" : "wss";
 
+    // Establish a websocket connection
+    const wsUri = `${protocol}://${location.host}`;
+    const client = new WebSocket(wsUri, 'counter-protocol');
+
+    // Set up some event hooks
     client.onerror = function (err) {
         console.log('Connection Error: ', err);
     };
-
     client.onopen = function () {
         console.log('Client Connected');
     };
-
     client.onclose = function () {
         console.log('Client Closed');
     };
-
     client.onmessage = function (e) {
         if (typeof e.data === 'string') {
             try{
@@ -22,7 +27,7 @@ function initWsClient() {
                 render(newCount);
             }
             catch(err){
-                console.error('message reception error: ', err)
+                console.error('message reception error: ', err);
             }
         }
     };
@@ -89,7 +94,7 @@ function handleMinusClick(client) {
 function initPlusButton(client) {
     const $plus = document.getElementById("plusButton");
     $plus.onclick = (e) => { 
-        e.preventDefault()
+        e.preventDefault();
         handlePlusClick(client);
     };
 }
@@ -100,7 +105,7 @@ function initPlusButton(client) {
 function initMinusButton(client) {
     const $minus = document.getElementById("minusButton");
     $minus.onclick = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         handleMinusClick(client);
     };
 }
@@ -112,5 +117,5 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    init()
+    init();
 });
