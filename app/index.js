@@ -7,8 +7,9 @@ const { expressCspHeader, SELF, NONE } = require('express-csp-header');
 const port = process.env.PORT || 8765
 const hostname = process.env.HOSTNAME || `localhost:${port}`
 
-// Serve static assets (e.g. html) via normal ol' http
 const app = express();
+
+// Configure CSP behavior.
 app.use(expressCspHeader({
     directives: {
         'default-src': [SELF, `ws://${hostname}`,`wss://${hostname}`],
@@ -19,15 +20,16 @@ app.use(expressCspHeader({
         'block-all-mixed-content': true
     }
 }));
+
+// Serve static assets (e.g. html) via normal ol' http.
 app.use(express.static(__dirname + '/../client'));
 
-
-// Start an http server
+// Start an http(s) server.
 const server = app.listen(port, () => {
     console.log(`listening at ${hostname}, port ${port}`);
 });
 
-// Do the socket dance
+// Do the socket dance.
 configureWsServer(
     new WebSocketServer({
         httpServer: server
