@@ -1,17 +1,23 @@
-/** In-memory data store, with its interface. */
+/** Redis data store, with its interface. */
+const {
+    initRedisClient,
+    initCounter,
+    COUNTER_KEY
+} = require('./redisUtils');
 
-let count = 0;
+const client = initRedisClient();
+initCounter(client);
 
 function getCount() {
-    return count;
+    return client.getAsync(COUNTER_KEY);
 }
 
 function add(amount) {
-    count += amount;
+    return client.incrbyAsync(COUNTER_KEY, amount);
 }
 
 function subtract(amount) {
-    count -= amount;
+    return client.decrbyAsync(COUNTER_KEY, amount);
 }
 
 module.exports = {

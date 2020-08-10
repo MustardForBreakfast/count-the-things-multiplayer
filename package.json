@@ -21,10 +21,12 @@
   },
   "homepage": "https://github.com/MustardForBreakfast/count-the-things-multiplayer#readme",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "express": "^4.17.1",
     "express-csp-header": "^4.0.0",
     "http": "0.0.1-security",
     "path": "^0.12.7",
+    "redis": "^3.0.2",
     "websocket": "^1.0.31"
   },
   "devDependencies": {
