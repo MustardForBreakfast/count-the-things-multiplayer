@@ -5,7 +5,6 @@ import path from "path";
 import { configureWsServer } from "./init.js";
 
 const { expressCspHeader, SELF, NONE } = csp;
-
 const port = process.env.PORT || 8765;
 const hostname = process.env.HOSTNAME || `localhost:${port}`;
 

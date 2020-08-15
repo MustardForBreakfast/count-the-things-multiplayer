@@ -17,6 +17,7 @@ export function initRedisClient(redis_url) {
 
 /**
  * Set a counter key in redis server if it doesn't yet exist.
+ * Initialize its value to 0.
  */
 export function initCounter(client) {
   client
