@@ -1,14 +1,16 @@
+// Disabled temporarily until function is implemented.
+// eslint-disable-next-line no-unused-vars
 function originIsAllowed(origin) {
-    // TODO: put logic here to detect whether the specified origin is allowed.
-    return true;
+  // TODO: put logic here to detect whether the specified origin is allowed.
+  return true;
 }
 
 function authenticate() {
-    // TODO: put auth logic here.
-    return true;
+  // TODO: put auth logic here.
+  return true;
 }
 
 module.exports = {
-    originIsAllowed: originIsAllowed,
-    authenticate: authenticate,
-}
+  originIsAllowed: originIsAllowed,
+  authenticate: authenticate,
+};
