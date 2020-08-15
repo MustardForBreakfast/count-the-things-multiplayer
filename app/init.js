@@ -1,5 +1,5 @@
-const { sendCount, handleMessage } = require("./interface");
-const { originIsAllowed, authenticate } = require("./auth");
+import { sendCount, handleMessage } from "./interface.js";
+import { originIsAllowed, authenticate } from "./auth.js";
 
 function configureWsConnection(server, connection) {
   connection.on("message", function (message) {
@@ -15,7 +15,7 @@ function configureWsConnection(server, connection) {
     }
   });
 
-  connection.on("close", function (reasonCode, description) {
+  connection.on("close", () => {
     console.log(
       new Date() + " Peer " + connection.remoteAddress + " disconnected."
     );
@@ -25,7 +25,7 @@ function configureWsConnection(server, connection) {
   sendCount(connection);
 }
 
-function configureWsServer(server) {
+export function configureWsServer(server) {
   server.on("request", function (request) {
     if (!originIsAllowed(request.origin) || !authenticate()) {
       // Make sure we only accept requests from an allowed origin
@@ -45,7 +45,3 @@ function configureWsServer(server) {
     }
   });
 }
-
-module.exports = {
-  configureWsServer: configureWsServer,
-};
