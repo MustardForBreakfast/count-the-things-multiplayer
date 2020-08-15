@@ -1,21 +1,25 @@
 const { getCount, add, subtract } = require('./store');
 
 function sendCount(connection) {
-    const resp = {
-        count: getCount(),
-    }
-    connection.sendUTF(JSON.stringify(resp));
+    getCount().then((count) => {
+        const resp = {
+            count,
+        }
+        connection.sendUTF(JSON.stringify(resp));
+    })
 }
 
 function sendCountToAll(server) {
-    const resp = {
-        count: getCount(),
-    }
-    server.connections.forEach(
-        conn => {
-            conn.sendUTF(JSON.stringify(resp));
+    getCount().then((count) => {
+        const resp = {
+            count,
         }
-    )
+        server.connections.forEach(
+            conn => {
+                conn.sendUTF(JSON.stringify(resp));
+            }
+        )
+    })
 }
 
 function handleMessage(message, server) {
@@ -27,9 +31,13 @@ function handleMessage(message, server) {
         }
 
         if (content.op === 'add') {
-            add(content.value);
+            add(content.value).catch((err)=>{
+                console.error(`Error adding value ${content.value}: `, err)
+            });
         } else if (content.op === 'subtract') {
-            subtract(content.value);
+            subtract(content.value).catch((err)=>{
+                console.error(`Error subtracting value ${content.value}: `, err)
+            })
         } else {
             throw `unrecognized op: ${content.op}`;
         }
