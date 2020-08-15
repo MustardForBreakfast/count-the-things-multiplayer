@@ -18,7 +18,7 @@ function initRedisClient(redis_url) {
  * Set a counter key in redis server if it doesn't yet exist.
  */
 function initCounter(client) {
-  const counter = client
+  client
     .getAsync(COUNTER_KEY)
     .then((val) => {
       if (val === null) {

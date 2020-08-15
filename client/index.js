@@ -11,7 +11,7 @@ function initWsClient() {
 
   // Set up some event hooks
   client.onerror = function (err) {
-    console.log("Connection Error: ", err);
+    console.error("Connection Error: ", err);
   };
   client.onopen = function () {
     console.log("Client Connected");

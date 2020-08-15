@@ -1,0 +1,10 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  // Ensure that the automation shell (used for tasks) is consistent,
+  // in case anyone has customized their integrated shell.
+  "terminal.integrated.automationShell.osx": "bash"
+}
