@@ -5,7 +5,7 @@ const {
     COUNTER_KEY
 } = require('./redisUtils');
 
-const client = initRedisClient();
+const client = initRedisClient(process.env.REDIS_URL || null);
 initCounter(client);
 
 function getCount() {

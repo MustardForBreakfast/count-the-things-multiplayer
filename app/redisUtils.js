@@ -2,11 +2,12 @@ const { promisifyAll } = require("bluebird");
 const redis = promisifyAll(require("redis"));
 
 const COUNTER_KEY = "count-the-things:counter";
-const REDIS_URL = process.env.REDIS_URL || null;
 
-// TODO: do this with some configs/env vars.
-function initRedisClient() {
-    const client = redis.createClient(REDIS_URL);
+/**
+ * Initialize a Redis client
+ */
+function initRedisClient(redis_url) {
+    const client = redis.createClient(redis_url);
     client.on("error", function (error) {
         console.error("redis error: ", error);
     });
