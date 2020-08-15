@@ -1,5 +1,6 @@
 {
   "name": "count-the-things-multiplayer",
+  "type": "module",
   "version": "1.0.0",
   "description": "count the things - multiplayer edition!",
   "main": "index.js",

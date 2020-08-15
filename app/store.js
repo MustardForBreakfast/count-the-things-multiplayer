@@ -1,23 +1,17 @@
 /** Redis data store, with its interface. */
-const { initRedisClient, initCounter, COUNTER_KEY } = require("./redisUtils");
+import { initRedisClient, initCounter, COUNTER_KEY } from "./redisUtils.js";
 
 const client = initRedisClient(process.env.REDIS_URL || null);
 initCounter(client);
 
-function getCount() {
+export function getCount() {
   return client.getAsync(COUNTER_KEY);
 }
 
-function add(amount) {
+export function add(amount) {
   return client.incrbyAsync(COUNTER_KEY, amount);
 }
 
-function subtract(amount) {
+export function subtract(amount) {
   return client.decrbyAsync(COUNTER_KEY, amount);
 }
-
-module.exports = {
-  getCount: getCount,
-  add: add,
-  subtract: subtract,
-};

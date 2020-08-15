@@ -1,6 +1,6 @@
-const { getCount, add, subtract } = require("./store");
+import { getCount, add, subtract } from "./store.js";
 
-function sendCount(connection) {
+export function sendCount(connection) {
   getCount().then((count) => {
     const resp = {
       count,
@@ -9,7 +9,7 @@ function sendCount(connection) {
   });
 }
 
-function sendCountToAll(server) {
+export function sendCountToAll(server) {
   getCount().then((count) => {
     const resp = {
       count,
@@ -20,7 +20,7 @@ function sendCountToAll(server) {
   });
 }
 
-function handleMessage(message, server) {
+export function handleMessage(message, server) {
   try {
     const content = JSON.parse(message.utf8Data);
 
@@ -44,9 +44,3 @@ function handleMessage(message, server) {
     console.log("invalid message content: ", err);
   }
 }
-
-module.exports = {
-  sendCount: sendCount,
-  sendCountToAll: sendCountToAll,
-  handleMessage: handleMessage,
-};

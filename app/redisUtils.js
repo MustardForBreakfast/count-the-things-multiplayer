@@ -1,12 +1,13 @@
-const { promisifyAll } = require("bluebird");
-const redis = promisifyAll(require("redis"));
+import bb from "bluebird";
+import _redis from "redis";
+const redis = bb.promisifyAll(_redis);
 
-const COUNTER_KEY = "count-the-things:counter";
+export const COUNTER_KEY = "count-the-things:counter";
 
 /**
  * Initialize a Redis client
  */
-function initRedisClient(redis_url) {
+export function initRedisClient(redis_url) {
   const client = redis.createClient(redis_url);
   client.on("error", function (error) {
     console.error("redis error: ", error);
@@ -17,7 +18,7 @@ function initRedisClient(redis_url) {
 /**
  * Set a counter key in redis server if it doesn't yet exist.
  */
-function initCounter(client) {
+export function initCounter(client) {
   client
     .getAsync(COUNTER_KEY)
     .then((val) => {
@@ -29,9 +30,3 @@ function initCounter(client) {
       console.error(err);
     });
 }
-
-module.exports = {
-  initRedisClient,
-  initCounter,
-  COUNTER_KEY,
-};

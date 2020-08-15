@@ -1,8 +1,10 @@
-const express = require("express");
-const path = require("path");
-const WebSocketServer = require("websocket").server;
-const { configureWsServer } = require("./init");
-const { expressCspHeader, SELF, NONE } = require("express-csp-header");
+import express from "express";
+import websocket from "websocket";
+import csp from "express-csp-header";
+import path from "path";
+import { configureWsServer } from "./init.js";
+
+const { expressCspHeader, SELF, NONE } = csp;
 
 const port = process.env.PORT || 8765;
 const hostname = process.env.HOSTNAME || `localhost:${port}`;
@@ -24,7 +26,7 @@ app.use(
 );
 
 // Serve static assets (e.g. html) via normal ol' http.
-app.use(express.static(__dirname + "/../client"));
+app.use(express.static(path.resolve("client")));
 
 // Start an http(s) server.
 const server = app.listen(port, () => {
@@ -33,7 +35,7 @@ const server = app.listen(port, () => {
 
 // Do the socket dance.
 configureWsServer(
-  new WebSocketServer({
+  new websocket.server({
     httpServer: server,
   })
 );
