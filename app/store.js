@@ -5,7 +5,8 @@ const client = initRedisClient(process.env.REDIS_URL || null);
 initCounter(client);
 
 export function getCount() {
-  return client.getAsync(COUNTER_KEY);
+  // Redis values come back as strings, so we need to parse count as an int.
+  return client.getAsync(COUNTER_KEY).then((val) => parseInt(val, 10));
 }
 
 export function add(amount) {
