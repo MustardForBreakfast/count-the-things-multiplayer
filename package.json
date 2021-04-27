@@ -28,7 +28,7 @@
     "express-csp-header": "^4.0.0",
     "http": "0.0.1-security",
     "path": "^0.12.7",
-    "redis": "^3.0.2",
+    "redis": "^3.1.1",
     "websocket": "^1.0.31"
   },
   "devDependencies": {
